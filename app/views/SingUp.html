@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/SingUp.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.2.3/dist/cdn.min.js"></script>
+    <title>Sing Up</title>
+</head>
+<body class="bg-gray-200">
+<div >
+    <div class="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto my-10 max-w-sm lg:max-w-4xl">
+          <div class="hidden lg:block lg:w-1/2 bg-cover " style="background-image:url(/public/img/varun-gaba-jokxn-4kogA-unsplash.jpg)"></div>
+          <div class="w-full p-8 lg:w-1/2">
+              <h2 class="text-2xl font-semibold text-gray-700 text-center">Electro Maroc</h2>
+              <p class="text-xl text-gray-600 text-center">Welcome back!</p>
+        
+              <div class="mt-4 flex items-center justify-between">
+                  <span class="border-b w-1/5 lg:w-1/4"></span>
+                  <a href="#" class="text-xs text-center text-gray-500 uppercase">Sing Up</a>
+                  <span class="border-b w-1/5 lg:w-1/4"></span>
+              </div>
+              <div class="mt-4">
+                <div class="flex gap-5 py-7">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">First Name</label>
+                    <input class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-1 block w-full appearance-none" placeholder="your first name"type="text">
+                    </div>
+                   <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
+                    <input class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" placeholder="your last name" type="text">
+  
+                   </div>
+                </div>
+                  <div>
+
+                      <div class="pb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Phone Number </label>
+                    <input class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" placeholder="your last name" type="number">
+  
+                   </div>
+                  </div >
+                  <label class="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
+                  <input class="bg-gray-200 text-gray-700 focus:outline-none mb-5 focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"placeholder="your email here" type="email">
+                  <label class="block text-gray-700 text-sm font-bold mb-2">Address</label>
+                  <input class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"placeholder="your adress here" type="text">
+                </div>
+            
+
+
+  <div
+    class="inline-flex-column items-center space-x-2 rounded-md bg-gray-50 p-2"
+    x-data="{ isVisible: false }"
+    
+  >  
+  <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+ 
+   <div class="flex">
+    <input
+    type="password"
+    placeholder="password"
+    class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
+    @visibility.window="$el.type = ($el.type == 'password') ? 'text' : 'password' "
+  />
+
+  <button
+    class="block rounded-md px-1"
+    @click="$dispatch('visibility'); isVisible = !isVisible;"
+  >
+    <div x-show="isVisible">
+      <svg
+        class="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+        ></path>
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+        ></path>
+      </svg>
+    </div>
+
+    <div x-show="!isVisible">
+      <svg
+        class="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+        ></path>
+      </svg>
+    </div>
+  </button>
+   </div>
+  </div>
+
+  <div class="mt-4 py-2">
+    <div class="flex justify-between">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
+        
+    </div>
+
+
+                  <input class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none" placeholder="password" type="password">
+              </div>
+              <div class="mt-8 py-2">
+                  <button class="bg-gray-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-gray-600">Sing Up</button>
+              </div>
+              <div class="mt-4 flex items-center justify-between">
+
+              </div>
+              <div class=" mt-4  text-end font-bold">
+                <a href="#">back to home</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</body>
+</html>
