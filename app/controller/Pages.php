@@ -1,21 +1,19 @@
-<?php 
-class Pages extends Controller{
-    public function __construct(){
- 
+<?php
+class Pages extends Controller
+{
+  private $productModel;
+  public function __construct()
+  {
+    $this->productModel = $this->model('Product');
   }
 
-public function index(){
-  $data = [
-    'title' => 'welcome'
-  ];
-  $this->view('pages/index',$data);
-}
-
-public function about(){
-  $data = [
-    'title' => 'about us'
-  ];
-  $this->view('pages/about', $data);
+  public function index()
+  {
+    $products= $this->productModel->getProduct();
+    $data = [
+      'products' => $products 
+    ];
+    $this->view('pages/index', $data);
   }
+  
 }
-
