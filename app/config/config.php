@@ -9,6 +9,6 @@ define('APPROOT', dirname(dirname(__FILE__)));
 
 //URLroot 
 
-define('URLROOT', 'http://localhost/Electro-Maroc');
+define('URLROOT', 'http://localhost/Electro-mraroc');
 //site name 
 define('SITENAME', 'Electro maroc');

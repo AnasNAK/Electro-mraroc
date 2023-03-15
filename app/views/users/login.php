@@ -1,57 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/login.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>login</title>
+    <script src="https://kit.fontawesome.com/a4fc922de4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <title>
+        <?php echo SITENAME ?>
+    </title>
+    <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style.css">
+    <link rel="icon" type="image/png" href="<?= URLROOT . '/img/upload/E.png' ?>" />
 </head>
 
-<body class="bg-[#FFF2DF] font-[sitika] ">
+<body class="bg-[#3E3E3E] overflow-x-hidden">
 
-    <div>
-        <div class="flex bg-[#685942] rounded-lg shadow-lg overflow-hidden mx-auto my-20 max-w-sm lg:max-w-4xl ">
-            <div class="hidden my-auto lg:block lg:w-1/2 bg-cover flex flex-col justify-center items-center">
-                <img class="w-max ml-5  flex justify-items-center rounded-2xl " src="../public/img/simplone.png" alt="">
+
+    <!-- component -->
+
+    <div class=" min-h-screen py-6 flex flex-col justify-center sm:py-12">
+        <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
             </div>
-            <div class="w-full p-8 lg:w-1/2">
-                <h2 class="text-2xl font-semibold text-white text-center">GlowGuru</h2>
-                <p class="text-xl text-white text-center">Welcome back Admin!</p>
-
-                <div class="mt-4 flex items-center justify-between">
-                    <span class="border-b w-1/5 lg:w-1/4"></span>
-                    <a href="#" class="text-xs text-center text-white uppercase">Enter Your Information</a>
-                    <span class="border-b w-1/5 lg:w-1/4"></span>
-                </div>
-                <form action=" <?php echo URLROOT; ?>/Users/login " method="post">
-                    <div class="mt-4">
-                        <label class="block text-white text-sm font-bold mb-2">Usernam Or Email</label>
-                        <input class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none
-                         <?php echo (!empty($data['email_err'])); ?>" value="<?php echo $data['email']; ?>" type="text" name="email">
-                        <span class="font-bold text-orange-200"><?php echo $data['email_err']; ?></span>
+            <div class="relative px-4 py-7 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+                <div class="max-w-md mx-auto">
+                    <div>
+                        <h1 class="text-2xl font-semibold">Welcome Back You Can login Here</h1>
                     </div>
-                    <div class="mt-4">
-                        <div class="flex justify-between">
-                            <label class="block text-white text-sm font-bold mb-2">Password</label>
+                    <form action=" <?php echo URLROOT; ?>/Users/login " method="post">
+                        <div class="divide-y divide-gray-200">
+                            <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+                                <div class="relative">
+                                    <input autocomplete="off" id="email" name="email" type="text" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address" value="<?php echo $data['email']; ?>">
+                                    <label for="email" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Email Address</label>
+                                    <span class="font-bold text-orange-200"><?php echo $data['email_err']; ?></span>
+                                </div>
+                                <div class="relative">
+                                    <input autocomplete="off" id="password" name="password" type="password" class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password" value="<?php echo $data['password']; ?>">
+                                    <span class="font-bold text-orange-200"><?php echo $data['password_err']; ?></span>
+                                    <label for="password" class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Password</label>
+                                </div>
+                                <div class="relative flex flex-col gap-3">
+                                    <button class="bg-black text-white rounded-md px-2 py-1 w-fit duration-300 hover:scale-x-125 hover:scale-y-110 duration-300 hover:bg-[#6DB0FF] hover:font-bold ">Submit</button>
+                                    <a class="text-end font-bold duration-500 hover:text-[#6DB0FF]" href="<?= URLROOT . '/pages/index' ?>">Back to home</a>
+                                    <p class="text-sm">If you don't have an account ! you can <a class="text-end font-bold duration-500 hover:text-[#6DB0FF]" href="<?= URLROOT . '/Users/register' ?>">register Here</a></p>
+
+                                </div>
+                            </div>
+
                         </div>
-                        <input class="bg-gray-200 text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" name="password" type="password" value="<?php echo $data['password']; ?>">
-                        <span class="font-bold text-orange-200"><?php echo $data['password_err']; ?></span>
-                    </div>
-                    <div class="my-8 ">
-                        <a href="<?php echo URLROOT; ?>/ "><button class="bg-white text-black font-bold py-2 px-4 w-full rounded duration-200 hover:bg-[#E8D0AC] hover:text-white">Login</button>
-                        </a>
-
-                    </div>
-                    <div class=" mt-4 text-white text-end font-bold duration-200 hover:text-black">
-                        <a href="<?php echo URLROOT; ?>/pages/index">Back To Home</a>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</body>
 
-</html>
+
+</body>

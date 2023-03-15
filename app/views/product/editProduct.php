@@ -12,16 +12,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <link rel="stylesheet" href="<?php echo URLROOT; ?>/css/style.css">
-    <link rel="icon" type="image/png" href="../public/img/logo-1.png" />
+    <link rel="icon" type="image/png" href="<?= URLROOT . '/img/upload/E.png' ?>" />
     <link rel="stylesheet" href="./public/css/style.css">
 </head>
 
-<body class="bg-[#FFF2DF] font-[sitika] text-black">
+<body class="bg-[#3E3E3E] font-[sitika] text-black">
 
     <!-- form add product -->
-    <section class="max-w-4xl p-6 mx-auto bg-[#E8D0AC] rounded-md shadow-md my-7">
+    <section class="max-w-4xl p-6 mx-auto bg-[#6DB0FF] rounded-md shadow-md my-7">
         <h1 class="text-4xl font-bold capitalize ">Edit Product</h1>
-        <form action="<?= URLROOT . '/Products/edit/'. $data['id']; ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?= URLROOT . '/Products/edit/' . $data['id']; ?>" method="POST" enctype="multipart/form-data">
             <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                 <div>
                     <label class="font-bold" for="name">Product Name</label>
@@ -39,6 +39,15 @@
                     <label class="font-bold" for="price">Price</label>
                     <input id="price" name="price" value="<?= $data['price'] ?>" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-[#685942] rounded-md focus:border-[#685942] focus:outline-none focus:ring ">
                     <span class="font-bold text-orange-400"><?php echo $data['price_err']; ?></span>
+                </div>
+                <div class="flex flex-row-reverse  items-center gap-2">
+                    <label for="">Categorie</label>
+                    
+                    <select class="p-1 rounded " name="categorie" id="">
+                            <?php foreach ($data['categorie'] as $Categorie) : ?>
+                                <option class="bg-blue-100 text-bold font-bold" value="<?=(int)$Categorie->id?>"><?= $Categorie->name; ?></option>
+                            <?php endforeach; ?>
+                    </select>
                 </div>
                 <div>
                     <label class="font-bold" for="Description">Description</label>
@@ -73,7 +82,7 @@
 
             <div class="flex justify-between mt-6">
                 <div>
-                    <button type="submit" class="px-6 py-2 leading-5 transform rounded-md focus:outline-none font-bold bg-[#FFF8ED] transition hover:bg-[#685942] hover:text-[#FFF2DF]">
+                    <button type="submit" class="px-6 py-2 leading-5 transform rounded-md focus:outline-none font-bold bg-[#FFF8ED] transition hover:bg-[#F1F8FF]">
                         Save
                     </button>
                 </div>

@@ -4,13 +4,15 @@ class Products extends Controller
 {
 
     private $productModel;
+    protected $categorieModel;
+
 
     public function __construct()
     {
         if (!isLoggedIn()) {
-
             redirect('users/login');
         }
+        $this->categorieModel = $this->model('Categorie');
         $this->productModel = $this->model('Product');
     }
 
@@ -20,33 +22,36 @@ class Products extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             var_dump($_FILES);
-            $count = count($_POST['name']);
-
-            for ($i = 0; $i < $count; $i++) {
-                // sanitize post array
-                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-
-                move_uploaded_file($_FILES['image']['tmp_name'][$i], 'img/upload/' . $_FILES['image']['name'][$i]);
-
-                $data = [
-                    'name' => $_POST['name'][$i],
-                    'stock' => $_POST['stock'][$i],
-                    'price' => $_POST['price'][$i],
-                    'description' => $_POST['description'][$i],
-                    'image' => $_FILES['image']['name'][$i]
-                ];
 
 
-                //make sure no errors
-                if ($this->productModel->addProduct($data)) {
-                    redirect('Products/dashboardAdmin');
-                } else {
-                    //load view with errors
-                    $this->view('product/addProduct', $data);
-                }
+            // sanitize post array
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            move_uploaded_file($_FILES['image']['tmp_name'], 'img/upload/' . $_FILES['image']['name']);
+
+            $data = [
+                'name' => $_POST['name'],
+                'stock' => $_POST['stock'],
+                'price' => $_POST['price'],
+                'description' => $_POST['description'],
+                'image' => $_FILES['image']['name'],
+                'categorie' => $_POST['categorie'],
+
+
+            ];
+
+
+            //make sure no errors
+            if ($this->productModel->addProduct($data)) {
+                redirect('Products/dashboardAdmin');
+            } else {
+                //load view with errors                    
+                $this->view('product/addProduct', $data);
             }
         } else {
+            $categoryData = $this->categorieModel->getCategorie();
             $data = [
+                'categorie'=> $categoryData,
                 'name' => '',
                 'stock' => '',
                 'price' => '',
@@ -73,11 +78,13 @@ class Products extends Controller
                     'name' => trim($_POST['name']),
                     'stock' => trim($_POST['stock']),
                     'price' => trim($_POST['price']),
+                    'categorie' => trim($_POST['categorie']),
                     'description' => trim($_POST['description']),
                     'image' => $product->image,
                     'name_err' => '',
                     'stock_err' => '',
                     'price_err' => '',
+                    'categorie_err' => '',
                     'description_err' => '',
                     'image_err' => ''
                 ];
@@ -87,11 +94,13 @@ class Products extends Controller
                     'name' => trim($_POST['name']),
                     'stock' => trim($_POST['stock']),
                     'price' => trim($_POST['price']),
+                    'categorie' => trim($_POST['categorie']),
                     'description' => trim($_POST['description']),
                     'image' => $_FILES['image']['name'],
                     'name_err' => '',
                     'stock_err' => '',
                     'price_err' => '',
+                    'categorie_err' => '',
                     'description_err' => '',
                     'image_err' => ''
                 ];
@@ -125,16 +134,20 @@ class Products extends Controller
         } else {
             $product = $this->productModel->findproductById($id);
         }
+        $categoryData = $this->categorieModel->getCategorie();
         $data = [
             'id' => $product->id,
             'name' => $product->name,
             'stock' => $product->stock,
             'price' => $product->price,
+            'categorie' => $categoryData,
+            'prevCategorie' =>  $product->categorie,
             'description' => $product->description,
             'image' => $product->image,
             'name_err' => '',
             'stock_err' => '',
             'price_err' => '',
+            'categorie_err' => '',
             'description_err' => '',
             'image_err' => ''
 
@@ -144,12 +157,12 @@ class Products extends Controller
     public function dashboardAdmin()
     {
         $products = $this->productModel->getProduct();
-         $productsum=$this->productModel->getProductByStock();
+        $productsum = $this->productModel->getProductByStock();
         $data = [
             'products' => $products,
-            'productsum' =>$productsum,
+            'productsum' => $productsum,
         ];
-        $this->view('inc/dashboardAdmin', $data);
+        $this->view('pages/dashboardAdmin', $data);
     }
     public function delete($id)
     {
@@ -160,5 +173,15 @@ class Products extends Controller
             die('ops');
         }
     }
+    public function details($id)
+    {
+        $result = $this->productModel->findproductById($id);
+        $categorie = $this->categorieModel->getCategorieById($result->categorie);
 
+        $data = [
+            'product' => $result,
+            'categories' => $categorie 
+        ];
+        $this->view('pages/product_details', $data);
+    }
 }

@@ -8,7 +8,7 @@ class Admin
   {
     $this->db = new Database();
   }
-  public function checkEmail($email) {
+  public function checkEmailadmin($email) {
     $this->db->query('SELECT * FROM admin WHERE email = :email');
     $this->db->bind(':email', $email);
 
@@ -22,7 +22,7 @@ class Admin
 
   }
   //login admin 
-  public function login($email, $password)
+  public function loginadmin($email, $password)
   {
     $this->db->query('SELECT * FROM admin WHERE email = :email AND password = :password');
     $this->db->bind(':email', $email);
